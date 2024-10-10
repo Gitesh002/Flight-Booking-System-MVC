@@ -22,8 +22,8 @@ namespace fbs.Models
         public string ArrivalCityCode { get; set; }
 
         // Navigation properties for relationships
-        public virtual Flight Flight { get; set; }
-        public virtual UserAccount User { get; set; }
+        public Flight Flight { get; set; }
+        public UserAccount User { get; set; }
         public List<Passenger> Passengers { get; set; }
     }
 
