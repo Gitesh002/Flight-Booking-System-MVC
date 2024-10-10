@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Admin Menu";
+}
+
+<h2>Admin Menu</h2>
+
+<div class="transparent-black-background">
+<div class="list-group"  >
+    <!-- Flight options -->
+        <a asp-action="Create" asp-controller="Flights" class="list-group-item list-group-item-action" style="margin-bottom:10px;border-radius:10px">Flight - Create</a>
+    <a asp-action="Index" asp-controller="Flights" class="list-group-item list-group-item-action" style="margin-bottom:10px;border-radius:10px">Flight - Index </a>
+
+        <a asp-action="Create" asp-controller="Planes" class="list-group-item list-group-item-action" style="margin-bottom:10px;border-radius:10px">Airplane - Create</a>
+        <a asp-action="Index" asp-controller="Planes" class="list-group-item list-group-item-action" style="margin-bottom:10px;border-radius:10px">Airplane - Index </a>
+
+    <!-- User options -->
+        <a asp-action="Index" asp-controller="UserAccounts" class="list-group-item list-group-item-action" style="margin-bottom:10px;border-radius:10px">User - Index</a>
+
+    <!-- Reservation options -->
+        <a asp-action="Index" asp-controller="Reservations" class="list-group-item list-group-item-action" style="margin-bottom:10px;border-radius:10px">Reservation - Index</a>
+
+    <!-- Admin options -->
+        <a asp-action="Create" asp-controller="Admin" class="list-group-item list-group-item-action" style="margin-bottom:10px;border-radius:10px">Admin - Create</a>
+</div>
+</div>

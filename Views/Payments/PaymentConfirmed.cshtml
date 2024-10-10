@@ -1,0 +1,74 @@
+﻿@{
+    // Payment Details
+    int paymentId = ViewBag.payment.PaymentId;
+    string paymentMethod = ViewBag.payment.PaymentMethod;
+    float amount = ViewBag.payment.Amount;
+    DateTime paymentDate = ViewBag.payment.PaymentDate;
+
+    // Flight Details
+    int flightId = ViewBag.flight.FlightId;
+    string departureCity = ViewBag.flight.DepartureCity;
+    string arrivalCity = ViewBag.flight.ArrivalCity;
+    DateTime departureDate = ViewBag.flight.DepartureDate;
+    int numberOfSeats = ViewBag.ticket.NumberOfSeats;
+
+    // Passenger Details 
+    List<Passenger> Passengers = ViewBag.ticket.Passengers;
+}
+
+<h2 style="margin-bottom:30px"><b><center>Payment Successful</center></b></h2>
+
+        <h4>Payment Information</h4>
+    <div class="transparent-black-background" style="border-radius: 0px;">
+        <div class="transparent-background" style="border-radius: 0px;">
+        <p><strong>Payment ID:</strong> @paymentId</p>
+        <p><strong>Payment Method:</strong> @paymentMethod</p>
+        <p><strong>Payment Amount:</strong> @amount.ToString("C")</p>
+        <p><strong>Payment Date:</strong> @paymentDate.ToString("dd-MM-yyyy")</p>
+        <p><strong>Payment Time:</strong> @paymentDate.ToString("hh:mm tt")</p>
+    </div>
+</div>
+        <h4>Flight Information</h4>
+
+    <div class="transparent-black-background" style="border-radius: 0px;">
+        <div class="transparent-background" style="border-radius: 0px;">
+        <p><strong>Flight Number:</strong> @flightId</p>
+        <p><strong>From:</strong> @departureCity</p>
+        <p><strong>To:</strong> @arrivalCity</p>
+        <p><strong>Departure Date:</strong> @departureDate.ToString("dd-MM-yyyy")</p>
+        <p><strong>Departure Time:</strong> @departureDate.ToString("hh:mm tt")</p>
+        <p><strong>Number of Seats:</strong> @numberOfSeats</p>
+    </div>
+</div>
+
+<h4>Passenger Information</h4>
+
+<div class="transparent-black-background" style="border-radius:0px">
+    <div class="transparent-light-background" style="border-radius:0px">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Serial No.</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Gender</th>
+                    <th>Age</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < numberOfSeats; i++)
+                {
+                    <tr>
+                        <td>@(i + 1).</td>
+                        <td>Passengers[i].FirstName</td>
+                        <td>Passengers[i].LastName</td>
+                        <td>Passengers[i].Gender</td>
+                        <td>Passengers[i].Age</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<a asp-action="Search" asp-controller="Home" class="btn btn-primary">Search for More Flights</a>

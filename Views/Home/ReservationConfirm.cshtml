@@ -1,0 +1,90 @@
+﻿@model Reservation
+
+@{
+    ViewData["Title"] = "Reservation Confirmation";
+    var AirportCode = ViewBag.airports;
+}
+
+<h2 style="margin-bottom:20px">Reservation Confirmation</h2>
+
+
+<h4>Flight Details</h4>
+<div class="reservation-summary">
+    <div class="transparent-black-background" style="border-radius:0px">
+        <div class="transparent-light-background" style="border-radius:0px">
+    
+    <div class="form-group">
+        <label><b>Flight Number:</b></label>
+        <span>@Model.FlightId</span>
+    </div>
+    <div class="form-group">
+        <label><b>Departure:</b></label>
+        <span>@AirportCode[Model.DepartureCityCode]</span>
+    </div>
+    <div class="form-group">
+        <label><b>Arrival:</b></label>
+        <span>@AirportCode[Model.ArrivalCityCode]</span>
+    </div>
+    <div class="form-group">
+        <label><b>Departure Date:</b></label>
+        <span>@Model.Flight.DepartureDate.ToString("dd-MM-yyyy")</span>
+    </div>
+    <div class="form-group">
+        <label><b>Departure Date:</b></label>
+        <span>@Model.Flight.DepartureDate.ToString("HH:mm:ss")</span>
+    </div>
+    <div class="form-group">
+        <label><b>Total Price:</b></label>
+        <span>@Model.TotalCost.ToString("C")</span>
+    </div>
+        </div>
+    </div>
+
+    <h4>Passenger Details</h4>
+    <div class="transparent-black-background" style="border-radius:0px">
+        <div class="transparent-light-background" style="border-radius:0px">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Serial No.</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Passengers.Count; i++)
+            {
+                <tr>
+                    <td>@(i + 1).</td>
+                    <td>@Model.Passengers[i].FirstName</td>
+                    <td>@Model.Passengers[i].LastName</td>
+                    <td>@Model.Passengers[i].Gender</td>
+                    <td>@Model.Passengers[i].Age</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="form-group">
+        <form method="get" action="@Url.Action("PaymentForm", "Payments")">
+            <input type="hidden" name="revId" value="@Model.ReservationId" />
+
+            @for (int i = 0; i < Model.Passengers.Count; i++)
+            {
+                <input type="hidden" name="Passengers[@i].FirstName" value="@Model.Passengers[i].FirstName" />
+                <input type="hidden" name="Passengers[@i].LastName" value="@Model.Passengers[i].LastName" />
+                <input type="hidden" name="Passengers[@i].Gender" value="@Model.Passengers[i].Gender" />
+                <input type="hidden" name="Passengers[@i].Age" value="@Model.Passengers[i].Age" />
+            }
+
+            <div class="d-flex justify-content-start">
+                <button type="submit" class="btn btn-success me-2">Confirm and Pay</button>
+                <a asp-action="Search" class="btn btn-danger">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+﻿@model fbs.Models.Flight
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Flight</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PlaneId" class="control-label"></label>
+                <select asp-for="PlaneId" class="form-control" id="departureDropdown" name="PlaneId" required>
+                    <option value="">Select Aircraft...</option>
+                    @foreach (var plane in ViewBag.Planes)
+                    {
+                        <option value="@plane.PlaneId">@plane.Airline (@plane.PlaneId)</option>
+                    }
+                </select>
+                <span asp-validation-for="PlaneId" class="text-danger"></span>
+            </div>
+            <!-- Departure City Dropdown -->
+            <div class="form-group">
+                <label asp-for="DepartureCity" class="control-label"></label>
+                <select asp-for="DepartureCity" class="form-control" id="departureDropdown" name="DepartureCity" required>
+                    <option value="">Select Departure City...</option>
+                    @foreach (var airport in ViewBag.Airports)
+                    {
+                        <option value="@airport.IATA_code">@airport.city_name (@airport.IATA_code)</option>
+                    }
+                </select>
+                <span asp-validation-for="DepartureCity" class="text-danger"></span>
+            </div>
+
+            <!-- Arrival City Dropdown -->
+            <div class="form-group">
+                <label asp-for="ArrivalCity" class="control-label"></label>
+                <select asp-for="ArrivalCity" class="form-control" id="arrivalDropdown" name="ArrivalCity" required>
+                    <option value="">Select Arrival City...</option>
+                    @foreach (var airport in ViewBag.Airports)
+                    {
+                        <option value="@airport.IATA_code">@airport.city_name (@airport.IATA_code)</option>
+                    }
+                </select>
+                <span asp-validation-for="ArrivalCity" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DepartureDate" class="control-label"></label>
+                <input asp-for="DepartureDate" class="form-control" />
+                <span asp-validation-for="DepartureDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AvailableSeats" class="control-label"></label>
+                <input asp-for="AvailableSeats" class="form-control" />
+                <span asp-validation-for="AvailableSeats" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

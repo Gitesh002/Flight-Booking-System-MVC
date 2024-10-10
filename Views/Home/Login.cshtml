@@ -1,0 +1,31 @@
+﻿@model fbs.Models.UserAccount
+
+<h2>User Login</h2>
+<body>
+    <div class="d-flex justify-content-center align-items-center" style="height:450px">
+        <form asp-action="Login" method="post" style="width: 400px;margin-right: 50px" >
+            <div class="form-group">
+                <label><h5>Username</h5></label>
+                <input type="text" name="username" class="form-control" required style="margin-bottom: 10px;" />
+            </div>
+            <div class="form-group">
+                <label><h5>Password</h5></label>
+                <input type="password" name="password" class="form-control" required style="margin-bottom: 10px;" />
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="button" class="btn btn-secondary" style="margin-left: 10px;"
+                        onclick="location.href='@Url.Action("Create","UserAccounts")'">
+                    Sign Up
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">Invalid username or password.</div>
+}
+</body>

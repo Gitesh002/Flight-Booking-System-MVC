@@ -1,0 +1,51 @@
+﻿@{
+    int flightId = ViewBag.Flight.FlightId;
+    string departureCity = ViewBag.Flight.DepartureCity;
+    string arrivalCity = ViewBag.Flight.ArrivalCity;
+    DateTime date = ViewBag.Flight.DepartureDate;
+    float TotalCost = ViewBag.ticket.TotalCost;
+    int revId = ViewBag.ticket.ReservationId;
+    List<Passenger> Passengers = ViewBag.ticket.Passengers;
+    int seatcount = ViewBag.ticket.NumberOfSeats;
+}
+
+<h2>Flight Details</h2>
+<div class="transparent-light-background">
+    <form asp-action="PaymentForm" method="post">
+        <div class="form-group" style="margin-bottom:10px">
+            <label><b>Flight Number:</b> @flightId</label>
+        </div>
+        <div class="form-group" style="margin-bottom:10px">
+            <label><b>Departure:</b> @departureCity</label>
+        </div>
+        <div class="form-group" style="margin-bottom:10px">
+            <label><b>Arrival:</b> @arrivalCity</label>
+        </div>
+        <div class="form-group" style="margin-bottom:10px">
+            <label><b>Date:</b> @date.ToString("dd-MM-yyyy")</label>
+        </div>
+        <div class="form-group" style="margin-bottom:10px">
+            <label><b>Time:</b> @date.ToString("hh:mm tt")</label>
+        </div>
+        <div class="form-group" style="margin-bottom:10px">
+            <label><b>Amount</b> @TotalCost.ToString("C")</label>
+        </div>
+        <div class="form-group">
+            <label name="PaymentMethod" class="control-label">Payment Method</label>
+            <select name="PaymentMethod" class="form-control">
+                <option value="CreditCard">Credit Card</option>
+                <option value="PayPal">PayPal</option>
+                <option value="DebitCard">Debit Card</option>
+            </select>
+        </div>
+        <input type="hidden" name="revId" value="@revId" style="margin-bottom:10px" />
+        @for (int i = 0; i < seatcount; i++)
+        {
+            <input type="hidden" name="Passengers[@i].FirstName" value="Passengers[i].FirstName" />
+            <input type="hidden" name="Passengers[@i].LastName" value="Passengers[i].LastName" />
+            <input type="hidden" name="Passengers[@i].Gender" value="Passengers[i].Gender" />
+            <input type="hidden" name="Passengers[@i].Age" value="Passengers[i].Age" />
+        }
+        <button type="submit" class="btn btn-primary">Pay</button>
+    </form>
+</div>

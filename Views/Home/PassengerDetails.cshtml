@@ -1,0 +1,39 @@
+﻿@model ReserveFlightViewModel
+
+<h2>Enter Passenger Details</h2>
+
+<form asp-action="ConfirmReservation" method="post">
+    <input type="hidden" name="FlightId" value="@Model.FlightId" />
+    <input type="hidden" name="NumberOfSeats" value="@Model.NumberOfSeats" />
+    <input type="hidden" name="DepartureCity" value="@Model.DepartureCity" />
+    <input type="hidden" name="PricePerSeat" value="@Model.PricePerSeat" />
+
+    @for (int i = 0; i < Model.NumberOfSeats; i++)
+    {
+        <h4>Passenger @(i + 1)</h4>
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" name="Passengers[@i].FirstName" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" name="Passengers[@i].LastName" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label>Gender</label>
+            <select name="Passengers[@i].Gender" class="form-control" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Age</label>
+            <input type="number" name="Passengers[@i].Age" class="form-control" required />
+        </div>
+        <hr />
+    }
+
+    <button type="submit" class="btn btn-primary">Confirm Reservation</button>
+</form>

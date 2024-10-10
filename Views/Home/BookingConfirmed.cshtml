@@ -1,0 +1,22 @@
+﻿@{
+    var flight = ViewBag.Flight;
+    int numberOfSeats = ViewBag.NumberOfSeats;
+    var username = ViewBag.Username;
+    float totalprice = @flight.Price * numberOfSeats;
+}
+
+<h2>Booking Confirmed!</h2>
+
+<div class="transparent-light-background">
+    <p>Your reservation has been successfully confirmed, @username.</p>
+    <p><strong>Flight Number:</strong> @flight.FlightId</p>
+    <p><strong>Departure:</strong> @flight.DepartureCity</p>
+    <p><strong>Arrival:</strong> @flight.ArrivalCity</p>
+    <p><strong>Departure DateTime:</strong> @flight.DepartureDate.ToString("dd-MM-yyyy")</p>
+    <p><strong>Departure DateTime:</strong> @flight.DepartureDate.TimeOfDay</p>
+    <p><strong>Number of Seats:</strong> @numberOfSeats</p>
+    <p><strong>Total Cost:</strong> @totalprice.ToString("C")</p>
+    <p>Thank you for choosing our service!</p>
+</div >
+
+<a asp-action="Search" class="btn btn-primary" style="margin-top: 10px;">Search for More Flights</a>

@@ -1,0 +1,65 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Roboto', sans-serif; /* Apply the new Google Font */
+}
+
+
+body {
+    background-image: url('https://prd-sc102-cdn.rtx.com/-/media/ca/product-assets/marketing/c/cessna/business_cessna-cj4_impact_1920x1080.jpg?rev=7ed4a2bb2ebe4bc898c7a4610d8ef775');
+    background-size: cover; /* Adjust the background to cover the whole area */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-attachment: fixed; /* Keep the image fixed during scroll */
+}
+
+body-image{
+    width: 100%;
+    height: auto;
+    opacity: 0.1;
+}
+
+.transparent-background {
+    background-color: rgba(255, 255, 255, 0.8); /* White background with 80% opacity */
+    padding: 20px; /* Adds some padding for spacing */
+    border-radius: 10px; /* Rounds the corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+}
+
+.transparent-light-background {
+    background-color: rgba(255, 255, 255, 0.7); /* White background with 80% opacity */
+    padding: 20px; /* Adds some padding for spacing */
+    border-radius: 10px; /* Rounds the corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+}
+
+
+.transparent-black-background {
+    background-color: rgb(0, 0, 0,0.4); /* White background with 30% opacity */
+    padding: 20px; /* Adds some padding for spacing */
+    border-radius: 10px; /* Rounds the corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+    margin-bottom: 20px;
+}
+
+.content {
+    flex: 1;  Takes the remaining space and pushes the footer down 
+}
+
+footer {
+    background-color: rgb(0, 0, 0,0.3);
+
+}
