@@ -4,32 +4,53 @@
     string arrivalCity = ViewBag.Flight.ArrivalCity;
     int availableSeats = ViewBag.Flight.AvailableSeats;
     DateTime date = ViewBag.Flight.DepartureDate;
+    var Airports = ViewBag.Airports;
 }
 
-<h2>Reserve Flight</h2>
-<div class="transparent-light-background">
+<h2 class="text-center mb-4">Reserve Flight</h2>
+
+<div class="blur-background p-4 rounded shadow" style="max-width: 600px; margin: 0 auto;">
     <form asp-action="Reserve" method="post">
-        <div class="form-group" style="margin-bottom:10px">
-            <label><b>Flight Number:</b> @flightId</label>
+        <div class="form-group mb-3">
+            <label><strong>Flight Number:</strong></label>
+            <p class="form-control-plaintext">@flightId</p>
         </div>
-        <div class="form-group" style="margin-bottom:10px">
-            <label><b>Departure:</b> @departureCity</label>
+
+        <div class="form-group mb-3">
+            <label><strong>Departure:</strong></label>
+            <p class="form-control-plaintext">@Airports[@departureCity]</p>
         </div>
-        <div class="form-group" style="margin-bottom:10px">
-            <label><b>Arrival:</b> @arrivalCity</label>
+
+        <div class="form-group mb-3">
+            <label><strong>Arrival:</strong></label>
+            <p class="form-control-plaintext">@Airports[@arrivalCity]</p>
         </div>
-        <div class="form-group" style="margin-bottom:10px">
-            <label><b>Date Time:</b> @date.ToString("dd-MM-yyyy HH:mm")</label>
+
+        <div class="form-group mb-3">
+            <label><strong>Date:</strong></label>
+            <p class="form-control-plaintext">@date.ToString("dd-MM-yyyy")</p>
         </div>
-        <div class="form-group" style="margin-bottom:10px">
-            <label><b>Available Seats:</b> @availableSeats</label>
+
+        <div class="form-group mb-3">
+            <label><strong>Time:</strong></label>
+            <p class="form-control-plaintext">@date.ToString("HH:mm:ss tt")</p>
         </div>
-        <div class="form-group" style="margin-bottom:10px">
-            <label><b>Number of Seats</b></label>
-            <input type="number" name="numberOfSeats" class="form-control" required min="1" max="@availableSeats" />
+
+        <div class="form-group mb-3">
+            <label><strong>Available Seats:</strong></label>
+            <p class="form-control-plaintext">@availableSeats</p>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="numberOfSeats"><strong>Number of Seats</strong></label>
+            <input type="number" id="numberOfSeats" name="numberOfSeats" class="form-control" required min="1" max="@availableSeats" />
             <span class="text-danger"></span>
         </div>
+
         <input type="hidden" name="flightId" value="@flightId" />
-        <button type="submit" class="btn btn-primary">Proceed to Passenger Details</button>
+
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary btn-block" style="width: 100%;">Proceed to Passenger Details</button>
+        </div>
     </form>
 </div>

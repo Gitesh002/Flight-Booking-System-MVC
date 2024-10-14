@@ -1,49 +1,61 @@
 ﻿@model FlightSearchViewModel
 
-<h2>Search Flights</h2>
-<div class="transparent-black-background" style="height:150px;">
-<div class="d-flex justify-content-center align-items-center" style="height:150px;">
-    <form asp-action="SearchResults" method="post" style="width: 100%;">
-        <div class="row">
-            <!-- From field -->
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label><h5>From</h5></label>
-                    <input type="text" name="from" class="form-control" required style="margin-bottom: 10px;" />
+
+<div class="blur-black-background" style="margin-bottom:30px">
+    <h5 style="text-align:center">Search Flights</h5>
+    <div class="d-flex justify-content-center align-items-center" >
+        <form asp-action="SearchResults" method="post" style="width: 100%;">
+            <div class="row">
+                <!-- From field -->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="fromDropdown"><h5>From</h5></label>
+                        <select id="fromDropdown" name="from" class="form-control" required>
+                            <option value="">Select Departure</option>
+                            @foreach (var airport in Model.ports)
+                            {
+                                <option value="@airport.IATA_code">@airport.city_name (@airport.IATA_code)</option>
+                            }
+                            @* Optional helper text *@
+                        </select>
+                    </div>
+                </div>
+
+                <!-- To field -->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="toDropdown"><h5>To</h5></label>
+                        <select id="toDropdown" name="to" class="form-control" required>
+                            <option value="">Select Destination</option>
+                            @foreach (var airport in Model.ports)
+                            {
+                                <option value="@airport.IATA_code">@airport.city_name (@airport.IATA_code)</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Date field -->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="dateField"><h5>Date</h5></label>
+                        <input type="date" name="date" id="dateField" class="form-control" required min="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                    </div>
                 </div>
             </div>
 
-            <!-- To field -->
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label><h5>To</h5></label>
-                    <input type="text" name="to" class="form-control" required style="margin-bottom: 10px;" />
-                </div>
+            <!-- Submit Button -->
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary btn-block" style="width: 100%;">Search</button>
             </div>
-
-            <!-- Date field -->
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label><h5>Date</h5></label>
-                    <input type="date" name="date" class="form-control" required style="margin-bottom: 10px;" />
-                </div>
-            </div>
-        </div>
-
-        <!-- Submit Button -->
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary" style="margin-bottom:35px">Search</button>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
 </div>
 
 @if (Model.Flights != null && Model.Flights.Any())
 {   
-    <div class="transparent-black-background">
-    <div class="transparent-background">
-        <h2>Flight Search Results</h2>
-
+    <h5 style="text-align:center">Available Flights</h5>
+    <div class="blur-background">  
         <table class="table">
             <thead>
                 <tr>
@@ -75,7 +87,6 @@
                 }
             </tbody>
         </table>
-    </div>
     </div>
 }
 else

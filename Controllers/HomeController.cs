@@ -65,6 +65,8 @@ namespace fbs.Controllers
             var airports = _context.Airports
             .ToDictionary(a => a.IATA_code, a => $"{a.city_name} ({a.IATA_code})");
 
+            var airport = _context.Airports.ToList();
+
             // Create the ViewModel and pass it to the view
             var viewModel = new FlightSearchViewModel
             {
@@ -72,7 +74,8 @@ namespace fbs.Controllers
                 To = to,
                 Date = date,
                 Flights = flights,
-                Airports = airports
+                Airports = airports,
+                ports = airport
             };  
 
             return View(viewModel);
@@ -90,15 +93,13 @@ namespace fbs.Controllers
                 return NotFound(); // Handle flight not found or no available seats
             }
 
-            var reservation = new Reservation
-            {
-                FlightId = flightId,
-                // Optionally set other default values if necessary
-            };
+            var airports = _context.Airports
+            .ToDictionary(a => a.IATA_code, a => $"{a.city_name} ({a.IATA_code})");
 
             // Pass the flight details to the view
             ViewBag.Flight = flight; // Store the flight in ViewBag for access in the view
-            return View(reservation); // Pass the reservation model to the view
+            ViewBag.Airports = airports;
+            return View(); // Pass the reservation model to the view
         }
 
         [HttpPost]
@@ -125,7 +126,6 @@ namespace fbs.Controllers
                 return View(); // Return to the form if not enough seats are available
             }
 
-            // ------------------- Create Reservations ------------------------
             var username = HttpContext.Session.GetString("Username");
             var userId = HttpContext.Session.GetInt32("UserId");
             var user = await _context.UserAccounts
@@ -133,22 +133,7 @@ namespace fbs.Controllers
 
             var airports = _context.Airports
             .ToDictionary(a => a.IATA_code, a => $"{a.city_name} ({a.IATA_code})");
-            //var ticket = new Reservation();
-            //{
-            //    ticket.UserId = user.UserAccountId;
-            //    ticket.FlightId = flightId;
-            //    ticket.UserName = user.FirstName + " " + user.LastName;
-            //    ticket.NumberOfSeats = numberOfSeats;
-            //    ticket.TotalCost = flight.Price * numberOfSeats;
-            //    ticket.ReservationDate = DateTime.Now;
-            //}
-
-            //if (ticket != null)
-            //{
-            //    _context.Add(ticket);
-            //    await _context.SaveChangesAsync();
-            //}
-
+    
             var model = new ReserveFlightViewModel
             {
                 FlightId = flightId,
@@ -188,6 +173,8 @@ namespace fbs.Controllers
                 NumberOfSeats = model.NumberOfSeats,
                 TotalCost = model.NumberOfSeats * model.PricePerSeat,
                // Airports = airports,
+
+                ReservationDate = DateTime.Now,
 
                 DepartureCityCode = flights.DepartureCity,
                 ArrivalCityCode = flights.ArrivalCity,

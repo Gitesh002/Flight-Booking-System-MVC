@@ -8,6 +8,6 @@
         // Search results
         public IEnumerable<Flight> Flights { get; set; }
         public Dictionary<string, string> Airports { get; set; } // Maps IATA code to city name
-
+        public IEnumerable<Airport> ports { get; set; }
     }
 }

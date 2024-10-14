@@ -17,7 +17,6 @@ namespace fbs.Models
         public float TotalCost { get; set; }
         public DateTime ReservationDate { get; set; }
 
-        //public Dictionary<string, string> Airports { get; set; } // Maps IATA code to city name
         public string DepartureCityCode { get; set; }
         public string ArrivalCityCode { get; set; }
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using fbs.Models;
 using fbs.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace fbs.Controllers
 {
@@ -159,5 +160,30 @@ namespace fbs.Controllers
         {
           return (_context.UserAccounts?.Any(e => e.UserAccountId == id)).GetValueOrDefault();
         }
+
+             // Ensure the user is logged in
+        public async Task<IActionResult> PreviousReservations()
+        {
+            var userId = HttpContext.Session.GetInt32("UserId"); // Assuming you're using the username as an identifier
+
+            if (userId == null)
+            {
+                TempData["ErrorMessage"] = "You need to login to view your previous reservations.";
+                return RedirectToAction("Login", "Home"); // Redirect to the Login view in Home controller
+            }
+
+            var reservations = await _context.Reservations
+                .Where(r => r.UserId == userId)
+                .ToListAsync();
+
+            var airports = await _context.Airports
+           .ToDictionaryAsync(a => a.IATA_code, a => $"{a.city_name} ({a.IATA_code})");
+
+            //List<Passenger> passengers = await _context.Passengers.ToListAsync();
+
+            ViewBag.Airports = airports;
+            return View(reservations);
+        }
+
     }
 }

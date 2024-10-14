@@ -1,0 +1,41 @@
+﻿@model IEnumerable<fbs.Models.Reservation>
+@{
+
+    var Airports = ViewBag.Airports;
+}
+
+<h2>Your Previous Reservations</h2>
+
+
+<div class="transparent-black-background">
+    <div class="transparent-background">
+<table class="table">
+    <thead>
+        <tr>
+            <th>Flight</th>
+            <th>Departure</th>
+            <th>Arrival</th>
+            <th>Booking Date</th>
+            <th>Booking Time</th>
+            <th>Seats</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model)
+        {
+            <tr>
+                <td>@reservation.FlightId</td>
+                <td>@Airports[reservation.DepartureCityCode]</td>
+                <td>@Airports[reservation.ArrivalCityCode]</td>
+                <td>@reservation.ReservationDate.ToString("dd MMM yyyy")</td>
+                <td>@reservation.ReservationDate.ToString("hh:mm tt")</td>
+                <td>@reservation.NumberOfSeats</td>
+                <td>@reservation.TotalCost</td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+</div>
+

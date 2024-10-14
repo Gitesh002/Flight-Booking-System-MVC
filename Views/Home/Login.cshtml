@@ -1,28 +1,45 @@
 ﻿@model fbs.Models.UserAccount
 
-<h2>User Login</h2>
-<body>
-    <div class="d-flex justify-content-center align-items-center" style="height:450px">
-        <form asp-action="Login" method="post" style="width: 400px;margin-right: 50px" >
-            <div class="form-group">
-                <label><h5>Username</h5></label>
-                <input type="text" name="username" class="form-control" required style="margin-bottom: 10px;" />
-            </div>
-            <div class="form-group">
-                <label><h5>Password</h5></label>
-                <input type="password" name="password" class="form-control" required style="margin-bottom: 10px;" />
-            </div>
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["ErrorMessage"]
+    </div>
+}
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Login</button>
-                <button type="button" class="btn btn-secondary" style="margin-left: 10px;"
-                        onclick="location.href='@Url.Action("Create","UserAccounts")'">
-                    Sign Up
-                </button>
+
+<body>
+    
+    <div class="d-flex justify-content-center align-items-center" style="height:450px">
+        <form asp-action="Login" method="post" style="width: 400px; margin-right: 50px;margin-top: 90px;">
+            <div class="blur-container" style="width:auto">
+                <h2 class="text-center">Welcome!</h2>
+                <p class="text-center" style="font-size: 14px; color: #888;">Enter the details to Login</p>
+
+                <div class="form-group">
+                    <label for="username"></label>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Username" />
+                </div>
+
+                <div class="form-group">
+                    <label for="password"></label>
+                    <input type="password" name="password" id="password" class="form-control" required style="margin-bottom:20px" placeholder="Password" />
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block" style="width: 100%;">Login</button>
+                </div>
+
+                <div class="form-group text-center" style="margin-top: 15px;">
+                    <p>
+                        Don't have an account?
+                        <a href="@Url.Action("Create", "UserAccounts")" class="text-primary">Register Now</a>
+                    </p>
+                </div>
             </div>
         </form>
     </div>
-
+    
 
 @if (!ViewData.ModelState.IsValid)
 {
