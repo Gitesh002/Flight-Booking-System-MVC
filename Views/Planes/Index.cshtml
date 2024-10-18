@@ -10,14 +10,15 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<div class="blur-black-background">
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Airline)
+                @Html.DisplayNameFor(model => model.PlaneId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TotalSeats)
+                @Html.DisplayNameFor(model => model.Airline)
             </th>
             <th></th>
         </tr>
@@ -26,10 +27,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Airline)
+                @Html.DisplayFor(modelItem => item.PlaneId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TotalSeats)
+                @Html.DisplayFor(modelItem => item.Airline)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PlaneId">Edit</a> |
@@ -40,3 +41,4 @@
 }
     </tbody>
 </table>
+</div>

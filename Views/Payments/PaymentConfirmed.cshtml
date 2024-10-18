@@ -34,6 +34,7 @@
             <div class="col-md-6">
                 <p><strong>Payment Amount:</strong> @amount.ToString("C")</p>
             </div>
+         </div>
         <div class="row">
             <div class="col-md-6">
                 <p><strong>Payment Date:</strong> @paymentDate.ToString("dd-MM-yyyy")</p>
@@ -42,8 +43,8 @@
                 <p><strong>Payment Time:</strong> @paymentDate.ToString("hh:mm tt")</p>
             </div>
         </div>
+        </div>
     </div>
-
 
     <!-- Flight Information -->
     <h5>Flight Information</h5>
@@ -107,4 +108,4 @@
         <a asp-action="Search" asp-controller="Home" class="btn btn-primary">Search for More Flights</a>
     </div>
 </div>
-</div>
+

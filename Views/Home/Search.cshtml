@@ -1,13 +1,27 @@
 ﻿@model IEnumerable<fbs.Models.Airport>
 
-
 <div class="blur-black-background">
     <h5 style="text-align:center">Search Flights</h5>
     <div class="d-flex justify-content-center align-items-center">
         <form asp-action="SearchResults" method="post" style="width: 100%;">
             <div class="row">
+                <!-- Trip Type -->
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <h5>Trip Type</h5>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="tripType" id="oneWay" value="OneWay" checked onchange="toggleReturnDate(false)">
+                            <label class="form-check-label" for="oneWay">One Way</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="tripType" id="roundTrip" value="RoundTrip" onchange="toggleReturnDate(true)">
+                            <label class="form-check-label" for="roundTrip">Round Trip</label>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- From field -->
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="form-group">
                         <label for="fromDropdown"><h5>From</h5></label>
                         <select id="fromDropdown" name="from" class="form-control" required>
@@ -16,13 +30,12 @@
                             {
                                 <option value="@airport.IATA_code">@airport.city_name (@airport.IATA_code)</option>
                             }
-                            @* Optional helper text *@
                         </select>
                     </div>
                 </div>
 
                 <!-- To field -->
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="form-group">
                         <label for="toDropdown"><h5>To</h5></label>
                         <select id="toDropdown" name="to" class="form-control" required>
@@ -35,11 +48,19 @@
                     </div>
                 </div>
 
-                <!-- Date field -->
-                <div class="col-md-4">
+                <!-- Departure Date field -->
+                <div class="col-md-3">
                     <div class="form-group">
                         <label for="dateField"><h5>Date</h5></label>
-                        <input type="date" name="date" id="dateField" class="form-control" required min="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                        <input type="date" name="departureDate" id="dateField" class="form-control" required min="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                    </div>
+                </div>
+
+                <!-- Return Date field (Initially hidden) -->
+                <div class="col-md-3" id="returnDateField" style="display: none;">
+                    <div class="form-group">
+                        <label for="returnDate"><h5>Return Date</h5></label>
+                        <input type="date" name="returnDate" id="returnDate" class="form-control" min="@DateTime.Today.ToString("yyyy-MM-dd")" />
                     </div>
                 </div>
             </div>
@@ -51,11 +72,9 @@
         </form>
     </div>
 </div>
+
 <script>
-    $(document).ready(function() {
-        $('#fromDropdown, #toDropdown').select2({
-            placeholder: "Select an airport...",
-            allowClear: true
-        });
-    });
+    function toggleReturnDate(isRoundTrip) {
+        document.getElementById('returnDateField').style.display = isRoundTrip ? 'block' : 'none';
+    }
 </script>

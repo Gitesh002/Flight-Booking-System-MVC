@@ -13,6 +13,8 @@ namespace fbs.Models
         public int Age { get; set; }
         public string PhoneNumber { get; set; }
         // Optional: You can add other attributes like Address, LoyaltyPoints, etc.
+
+        public bool IsAdmin { get; set; }
     }
 
 }

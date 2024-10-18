@@ -23,10 +23,10 @@ namespace fbs.Controllers // Updated namespace
         [HttpPost]
         public IActionResult Login(string username, string password)
         {
-            var admin = _context.Admins.FirstOrDefault(a => a.Username == username && a.Password == password);
+            var admin = _context.UserAccounts.FirstOrDefault(a => a.UserName == username && a.Password == password);
             if (admin != null)
             {
-                HttpContext.Session.SetString("Username", admin.Username);
+                HttpContext.Session.SetString("Username", admin.UserName);
                 return RedirectToAction("AdminMenu", "Admin"); // Redirect to flight listing after login
             }
             ModelState.AddModelError("", "Invalid username or password");

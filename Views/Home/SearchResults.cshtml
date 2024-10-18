@@ -15,8 +15,7 @@
                             @foreach (var airport in Model.ports)
                             {
                                 <option value="@airport.IATA_code">@airport.city_name (@airport.IATA_code)</option>
-                            }
-                            @* Optional helper text *@
+                            }              
                         </select>
                     </div>
                 </div>
@@ -60,6 +59,7 @@
             <thead>
                 <tr>
                     <th>Flight Number</th>
+                    <th>Airline</th>
                     <th>Departure</th>
                     <th>Arrival</th>
                     <th>Departure Date</th>
@@ -74,6 +74,7 @@
                 {
                     <tr>
                         <td>@flight.FlightId</td>
+                        <td>@Model.Airline[flight.PlaneId]</td>
                         <td>@Model.Airports[@flight.DepartureCity]</td>
                         <td>@Model.Airports[@flight.ArrivalCity]</td>
                         <td>@flight.DepartureDate.ToString("dd-MM-yyyy")</td>

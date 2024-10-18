@@ -57,7 +57,7 @@ namespace fbs.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserAccountId,FirstName,LastName,UserName,Email,Password,Age,PhoneNumber")] UserAccount userAccount)
+        public async Task<IActionResult> Create([Bind("UserAccountId,FirstName,LastName,UserName,Email,Password,Age,PhoneNumber,IsAdmin")] UserAccount userAccount)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace fbs.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserAccountId,FirstName,LastName,UserName,Email,Password,Age,PhoneNumber")] UserAccount userAccount)
+        public async Task<IActionResult> Edit(int id, [Bind("UserAccountId,FirstName,LastName,UserName,Email,Password,Age,PhoneNumber,IsAdmin")] UserAccount userAccount)
         {
             if (id != userAccount.UserAccountId)
             {
@@ -161,7 +161,7 @@ namespace fbs.Controllers
           return (_context.UserAccounts?.Any(e => e.UserAccountId == id)).GetValueOrDefault();
         }
 
-             // Ensure the user is logged in
+         // Ensure the user is logged in
         public async Task<IActionResult> PreviousReservations()
         {
             var userId = HttpContext.Session.GetInt32("UserId"); // Assuming you're using the username as an identifier

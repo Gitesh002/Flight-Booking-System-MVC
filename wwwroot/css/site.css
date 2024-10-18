@@ -102,3 +102,11 @@ footer {
     border: 1px solid rgba(255, 255, 255, 0.3); /* Optional border */
     margin: 100px auto; /* Center the form on the page */
 }
+
+
+.login-page {
+    background-image: url('https://wallpapers.com/images/hd/sea-of-clouds-sky-background-mm5t0g3r76d274pi.jpg');
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-attachment: fixed; /* Keep the image fixed during scroll */
+}

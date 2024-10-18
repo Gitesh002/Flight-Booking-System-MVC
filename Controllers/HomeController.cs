@@ -40,8 +40,15 @@ namespace fbs.Controllers
             {
                 HttpContext.Session.SetString("Username", user.UserName);  // Store the username
                 HttpContext.Session.SetInt32("UserId", user.UserAccountId);
-
-                return RedirectToAction("Search", "Home"); // Redirect to search view after login
+                if(user.IsAdmin == true)
+                {
+                    return RedirectToAction("AdminMenu","Admin");
+                }
+                else
+                {
+                    return RedirectToAction("Search", "Home"); // Redirect to search view after login
+                }
+              
             }
             ModelState.AddModelError("", "Invalid username or password");
             return View();
@@ -50,6 +57,14 @@ namespace fbs.Controllers
         // --------------------------  Search Page ---------------------------------- 
         public IActionResult Search()
         {
+            var userId = HttpContext.Session.GetInt32("UserId"); // Assuming you're using the username as an identifier
+
+            if (userId == null)
+            {
+                TempData["ErrorMessage"] = "You need to login to search for flights.";
+                return RedirectToAction("Login", "Home"); // Redirect to the Login view in Home controller
+            }
+
             var airports = _context.Airports.ToList();  // Fetch airport data from the database
             return View(airports);
         }
@@ -67,6 +82,9 @@ namespace fbs.Controllers
 
             var airport = _context.Airports.ToList();
 
+            var airline = _context.Planes.ToDictionary(a => a.PlaneId, a => $"{a.Airline}");
+
+
             // Create the ViewModel and pass it to the view
             var viewModel = new FlightSearchViewModel
             {
@@ -75,7 +93,9 @@ namespace fbs.Controllers
                 Date = date,
                 Flights = flights,
                 Airports = airports,
-                ports = airport
+                ports = airport,
+                Airline = airline
+                
             };  
 
             return View(viewModel);
